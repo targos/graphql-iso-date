@@ -10,6 +10,7 @@
 
 import { GraphQLScalarType, Kind } from 'graphql'
 import type {GraphQLScalarTypeConfig} from 'graphql' // eslint-disable-line
+import moment from 'moment';
 import {
   validateDateTime,
   validateUnixTimestamp,
@@ -58,7 +59,9 @@ const config: GraphQLScalarTypeConfig<Date, string> = {
       throw new TypeError(
         'DateTime cannot represent an invalid Unix timestamp ' + value
       )
-    } else {
+    } else if (moment.isMoment(value)) {
+      return value.toISOString();
+    } {
       throw new TypeError(
         'DateTime cannot be serialized from a non string, ' +
         'non numeric or non Date type ' + JSON.stringify(value)

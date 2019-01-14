@@ -12,6 +12,7 @@ import GraphQLDateTime from './'
 import { Kind } from 'graphql'
 // flowlint-next-line untyped-import:off
 import { stringify } from 'jest-matcher-utils'
+import moment from 'moment';
 
 const invalidDates = [
   // General
@@ -90,6 +91,12 @@ describe('GraphQLDateTime', () => {
           GraphQLDateTime.serialize(input)
         ).toEqual(output)
       })
+    })
+
+    it('serializes Moment.js objects into UTC date-time-string', () => {
+      expect(
+        GraphQLDateTime.serialize(moment('2016-02-01T00:00:15.000Z'))
+      ).toEqual('2016-02-01T00:00:15.000Z');
     })
 
     invalidDates.forEach(dateString => {
