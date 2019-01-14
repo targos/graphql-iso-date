@@ -13,7 +13,7 @@
   },
   "scripts": {
     "examples": "npm run build:babel && npm run build:flow && babel-node examples/index.js",
-    "build": "npm run build:clean && npm run build:babel && npm run build:flow && npm run build:package-json",
+    "build": "npm run build:clean && npm run build:babel && npm run build:flow",
     "build:clean": "rm -rf ./dist",
     "build:package-json": "node ./resources/clean-package-json.js",
     "build:babel": "babel src --ignore __tests__,*.test.js --out-dir dist/ ",
